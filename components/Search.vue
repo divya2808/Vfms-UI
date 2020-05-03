@@ -6,7 +6,7 @@
 </template>
 
 <script>
-// import Search from '../../static/search.svg'
+//import Search from '~/static/search.svg'
   export default {
     // components: {
     //   Search

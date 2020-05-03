@@ -21,7 +21,7 @@ export default {
 <style lang="scss" scoped>
 .card {
   width: 320px;
-  height: 260px;
+  height: 220px;
   box-shadow: 0 1rem 1.5rem 0 rgba(26, 35, 63, 0.1),
       0 0.25rem 0.5rem 0 rgba(27, 43, 52, 0.06);
   transition: all 0.3s ease;

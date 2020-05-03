@@ -23,7 +23,7 @@ export default {
           id: '1',
           name: 'Courses',
           subNavItems: ['Affine cipher', 'Shift Cipher', 'Substitution cipher','Vigenere cipher'],
-          link: '/'
+          link: '/courses'
         },
         {
           id: '2',
@@ -33,9 +33,9 @@ export default {
         },
         {
           id: '3',
-          name: 'Concepts',
+          name: 'Resources',
           subNavItems: ['Affine Cipher Courses', 'Shift Cipher Courses', 'Subsitution Cipher Courses', 'Vigenere Cipher Courses'],
-          link: '/'
+          link: '/resources'
         }
       ],
       activeNavItem: null

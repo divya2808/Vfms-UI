@@ -7,7 +7,7 @@
           <span class="absolute">Math</span>
         </div>
         <ul class="flex flex-end">
-          <li v-for="item in navItems" :key="item.id" class="mx-8 cursor-pointer hover:text-pink-300 nav-item relative" @click="activeNavItem = item">{{ item.name }}</li>
+          <nuxt-link :to="item.link" v-for="item in navItems" :key="item.id" class="mx-8 cursor-pointer hover:text-pink-300 nav-item relative no-underline" @click="activeNavItem = item">{{ item.name }}</nuxt-link>
         </ul>
       </div>
     </div>
@@ -22,17 +22,20 @@ export default {
         {
           id: '1',
           name: 'Courses',
-          subNavItems: ['Affine cipher', 'Shift Cipher', 'Substitution cipher','Vigenere cipher']
+          subNavItems: ['Affine cipher', 'Shift Cipher', 'Substitution cipher','Vigenere cipher'],
+          link: '/'
         },
         {
           id: '2',
           name: 'Practices',
-          subNavItems: ['Affine Cipher Practice', 'Shift Cipher Practice', 'Substitution Cipher Practice', 'Vigenere Cipher Practice']
+          subNavItems: ['Affine Cipher Practice', 'Shift Cipher Practice', 'Substitution Cipher Practice', 'Vigenere Cipher Practice'],
+          link: '/practices'
         },
         {
           id: '3',
           name: 'Concepts',
-          subNavItems: ['Affine Cipher Courses', 'Shift Cipher Courses', 'Subsitution Cipher Courses', 'Vigenere Cipher Courses']
+          subNavItems: ['Affine Cipher Courses', 'Shift Cipher Courses', 'Subsitution Cipher Courses', 'Vigenere Cipher Courses'],
+          link: '/'
         }
       ],
       activeNavItem: null
@@ -42,11 +45,15 @@ export default {
 </script>
 <style lang="scss">
 .nav-item {
-  transform: color 0.5s ease;
+  transition: color 0.5s ease;
 }
 
 .dropdown-menu {
   top: 100%;
   min-width: 120px;
+}
+
+.nuxt-link-exact-active {
+  @apply text-pink-300;
 }
 </style>

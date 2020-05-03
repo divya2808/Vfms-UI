@@ -7,7 +7,7 @@
           <span class="absolute">Math</span>
         </nuxt-link>
         <ul class="flex flex-end">
-          <nuxt-link :to="item.link" v-for="item in navItems" :key="item.id" class="mx-8 cursor-pointer hover:text-pink-300 nav-item relative no-underline" @click="activeNavItem = item">{{ item.name }}</nuxt-link>
+          <nuxt-link :to="item.link" v-for="item in navItems" :key="item.id" class="mx-8 cursor-pointer hover:text-pink-300 nav-item relative no-underline" :class="{'active': activeItem === item}" @click="activeNavItem = item">{{ item.name }}</nuxt-link>
         </ul>
       </div>
     </div>
@@ -53,7 +53,7 @@ export default {
   min-width: 120px;
 }
 
-.nuxt-link-exact-active {
+.active {
   @apply text-pink-300;
 }
 </style>

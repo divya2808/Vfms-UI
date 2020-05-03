@@ -2,10 +2,10 @@
   <div>
     <div class="bg-blue-900">
       <div class="flex w-5/6 h-24 mx-auto text-white items-center font-mono">
-        <div class="flex-1 text-5xl font-hairline relative cursor-pointer">
+        <nuxt-link to="/" class="flex-1 text-5xl font-hairline relative cursor-pointer">
           <span class="mr-2">Fun</span>
           <span class="absolute">Math</span>
-        </div>
+        </nuxt-link>
         <ul class="flex flex-end">
           <nuxt-link :to="item.link" v-for="item in navItems" :key="item.id" class="mx-8 cursor-pointer hover:text-pink-300 nav-item relative no-underline" @click="activeNavItem = item">{{ item.name }}</nuxt-link>
         </ul>

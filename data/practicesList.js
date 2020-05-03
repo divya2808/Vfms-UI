@@ -1,32 +1,181 @@
 export default [
-  { id: 1, name: 'Practice 1', description: 'description 1'},
-  { id: 2, name: 'Practice 2', description: 'description 2'},
-  { id: 3, name: 'Practice 3', description: 'description 3'},
-  { id: 4, name: 'Practice 4', description: 'description 4'},
-  { id: 5, name: 'Practice 5', description: 'description 5'},
-  { id: 6, name: 'Practice 6', description: 'description 6'},
-  { id: 7, name: 'Practice 7', description: 'description 7'},
-  { id: 8, name: 'Practice 8', description: 'description 8'},
-  { id: 9, name: 'Practice 9', description: 'description 9'},
-  { id: 10, name: 'Practice 10', description: 'description 10'},
-  { id: 11, name: 'Practice 11', description: 'description 11'},
-  { id: 12, name: 'Practice 12', description: 'description 12'},
-  { id: 13, name: 'Practice 13', description: 'description 13'},
-  { id: 14, name: 'Practice 14', description: 'description 14'},
-  { id: 15, name: 'Practice 15', description: 'description 15'},
-  { id: 16, name: 'Practice 16', description: 'description 16'},
-  { id: 17, name: 'Practice 17', description: 'description 17'},
-  { id: 18, name: 'Practice 18', description: 'description 18'},
-  { id: 19, name: 'Practice 19', description: 'description 19'},
-  { id: 20, name: 'Practice 20', description: 'description 20'},
-  { id: 21, name: 'Practice 21', description: 'description 21'},
-  { id: 22, name: 'Practice 22', description: 'description 22'},
-  { id: 23, name: 'Practice 23', description: 'description 23'},
-  { id: 24, name: 'Practice 24', description: 'description 24'},
-  { id: 25, name: 'Practice 25', description: 'description 25'},
-  { id: 26, name: 'Practice 26', description: 'description 26'},
-  { id: 27, name: 'Practice 27', description: 'description 27'},
-  { id: 28, name: 'Practice 28', description: 'description 28'},
-  { id: 29, name: 'Practice 29', description: 'description 29'},
-  { id: 30, name: 'Practice 30', description: 'description 30'},
+  { 
+    id: '1', 
+    name: 'Practice 1', 
+    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+    text: ''
+  },
+  { 
+    id: '2', 
+    name: 'Practice 2', 
+    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+    text: ''
+  },
+  { 
+    id: '3', 
+    name: 'Practice 3', 
+    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+    text: ''
+  },
+  { 
+    id: '4', 
+    name: 'Practice 4', 
+    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+    text: ''
+  },
+  { 
+    id: '5', 
+    name: 'Practice 5', 
+    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+    text: ''
+  },
+  { 
+    id: '6', 
+    name: 'Practice 6', 
+    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+    text: ''
+  },
+  { 
+    id: '7', 
+    name: 'Practice 7', 
+    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+    text: ''
+  },
+  { 
+    id: '8', 
+    name: 'Practice 8', 
+    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+    text: ''
+  },
+  { 
+    id: '9', 
+    name: 'Practice 9', 
+    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+    text: ''
+  },
+  { 
+    id: '10', 
+    name: 'Practice 10', 
+    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
+    text: ''
+  },
+  { 
+    id: '11', 
+    name: 'Practice 11', 
+    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
+    text: ''
+  },
+  { 
+    id: '12', 
+    name: 'Practice 12', 
+    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry'
+  },
+  { 
+    id: '13', 
+    name: 'Practice 13', 
+    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
+    text: ''
+  },
+  { 
+    id: '14', 
+    name: 'Practice 14', 
+    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
+    text: ''
+  },
+  { 
+    id: '15', 
+    name: 'Practice 15', 
+    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
+    text: ''
+  },
+  { 
+    id: '16', 
+    name: 'Practice 16', 
+    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
+    text: ''
+  },
+  { 
+    id: '17',
+    name: 'Practice 17', 
+    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
+    text: ''
+  },
+  { 
+    id: '18', 
+    name: 'Practice 18', 
+    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
+    text: ''
+  },
+  { 
+    id: '19', 
+    name: 'Practice 19', 
+    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
+    text: ''
+  },
+  { 
+    id: '20', 
+    name: 'Practice 20', 
+    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
+    text: ''
+  },
+  { 
+    id: '21',
+    name: 'Practice 21', 
+    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
+    text: ''
+  },
+  { 
+    id: '22', 
+    name: 'Practice 22', 
+    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
+    text: ''
+  },
+  { 
+    id: '23', 
+    name: 'Practice 23', 
+    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
+    text: ''
+  },
+  { 
+    id: '24', 
+    name: 'Practice 24', 
+    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
+    text: ''
+  },
+  { 
+    id: '25', 
+    name: 'Practice 25', 
+    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
+    text: ''
+  },
+  { 
+    id: '26', 
+    name: 'Practice 26', 
+    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
+    text: ''
+  },
+  { 
+    id: '27', 
+    name: 'Practice 27', 
+    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
+    text: ''
+  },
+  { 
+    id: '28', 
+    name: 'Practice 28', 
+    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
+    text: ''
+  },
+  { 
+    id: '29', 
+    name: 'Practice 29', 
+    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
+    text: ''
+  },
+  { 
+    id: '30', 
+    name: 'Practice 30', 
+    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
+    text: ''
+  },
 ]

@@ -4649,6 +4649,11 @@ js-base64@^2.1.8:
   resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.5.2.tgz#313b6274dda718f714d00b3330bbae6e38e90209"
   integrity sha512-Vg8czh0Q7sFBSUMWWArX/miJeBWYBPpdU/3M/DKSaekLMqrqVPaedp+5mZhie/r0lgrcaYBfwXatEew6gwgiQQ==
 
+js-cipher@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/js-cipher/-/js-cipher-1.0.5.tgz#010b8ba42e8e48f00b2c65361e665fb5272933b6"
+  integrity sha512-Zffnnlt83OamqcaGcZz4yuot2iM3S1zuxx1g3nbse3d1sJ6GGKL40mjRYAQStAgf6YfRqxABj8HDzHnM/WI8Sw==
+
 "js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"

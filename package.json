@@ -1,5 +1,5 @@
 {
-  "name": "CS630-Project",
+  "name": "CY520-Project",
   "version": "1.0.0",
   "description": "Project for the class CS630",
   "author": "Divya Kandlakunta",
@@ -18,7 +18,8 @@
     "node-sass": "^4.14.0",
     "nuxt": "^2.0.0",
     "nuxt-fontawesome": "^0.4.0",
-    "sass-loader": "^8.0.2"
+    "sass-loader": "^8.0.2",
+    "vee-validate": "^3.3.0"
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^1.0.0",

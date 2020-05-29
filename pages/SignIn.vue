@@ -1,0 +1,112 @@
+<template>
+  <div>
+    <ValidationObserver  v-slot="{ invalid }">
+      <form class="flex flex-col w-full">
+        <validation-provider rules="required" v-slot="{ errors }">
+          <div class="flex flex-col relative mt-8">
+            <div class="flex items-center">
+              <label class="mr-4 flex-basis-25">User Name:</label>
+              <input class="flex-basis-75" v-model="userName" type="text" name="userName" placeholder="UserName" />
+            </div>
+            <span class="absolute text-red-700 text-xs pin-b mt-2 error-text">{{ errors[0] }}</span>
+          </div>
+        </validation-provider>
+        <validation-provider rules="required" v-slot="{ errors }" class="mt-8">
+          <div class="flex flex-col relative">
+            <div class="flex items-center">
+              <label class="mr-4 flex-basis-25">Password:</label>
+              <input class="flex-basis-75" v-model="password" name="password" placeholder="Password" />
+            </div>
+            <span class="absolute text-red-700 text-xs pin-b mt-2 error-text">{{ errors[0] }}</span>
+          </div>
+        </validation-provider>
+      </form>
+      <div class="flex justify-center mt-16">
+        <button class="text-center" @click="onSubmit" type="submit" :disabled="invalid || isLockedOut">Create Account</button>
+      </div>
+      <span v-if="isLockedOut" class="block text-red-700 pt-2 text-center">Your login attempts exceeded with wrong username/password</span>
+    </ValidationObserver>
+  </div>
+</template>
+
+<script>
+import { ValidationObserver, ValidationProvider } from "vee-validate";
+export default {
+  components: {
+    ValidationObserver: ValidationObserver,
+    ValidationProvider: ValidationProvider
+  },
+  data() {
+    return {
+      firstName: '',
+      lastName: '',
+      email: '',
+      username: '',
+      password: '',
+      counter: 0,
+      isLockedOut: false
+    }
+  },
+  methods: {
+    onSubmit() {
+      this.counter++
+
+      if(this.counter >= 5) {
+        this.isLockedOut = true
+      }
+
+    }
+  }  
+}
+</script>
+
+<style lang="scss">
+.modal-container {
+  width: 600px;
+  box-shadow: 0 4px 8px 0 rgba(27,43,52,.12), 0 2px 4px 0 rgba(27,43,52,.08);
+  height: 75vh;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+input {
+  border-bottom: 1px solid rgba(27,43,52,.12);
+  max-width: 600px;
+  padding: 4px 8px 4px;
+
+  &:focus {
+    outline: none;
+    border: 1px solid #0081da;
+  }
+}
+
+button {
+  background-color: #0081da;
+  padding: 8px 54px;
+  border-radius: 20px;
+  color: #fff;
+  transition: all 0.2s ease;
+  outline: none;
+
+  &:hover {
+    background-color: #002D5C;
+  }
+
+  &:disabled {
+    @apply bg-gray-400;
+    cursor: default;
+  }
+}
+
+.error-text {
+  top: 100%;
+}
+
+.flex-basis-25 {
+  flex-basis: 25%;
+}
+
+.flex-basis-75 {
+  flex-basis: 75%;
+}
+</style>

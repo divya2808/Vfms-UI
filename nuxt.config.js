@@ -28,6 +28,7 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    {src: '~plugins/vee-validate.js', ssr: true}
   ],
   /*
   ** Nuxt.js dev-modules
@@ -78,6 +79,7 @@ module.exports = {
           }
         ]
       })
-    }
+    },
+    transpile: ["vee-validate/dist/rules"]
   }
 }

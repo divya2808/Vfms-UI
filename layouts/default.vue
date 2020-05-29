@@ -3,8 +3,7 @@
     <div class="bg-blue-900">
       <div class="flex w-5/6 h-24 mx-auto text-white items-center font-mono">
         <nuxt-link to="/" class="flex-1 text-5xl font-hairline relative cursor-pointer">
-          <span class="mr-2">Fun</span>
-          <span class="absolute">Math</span>
+          <span class="mr-2">VFMS</span>
         </nuxt-link>
         <ul class="flex flex-end">
           <nuxt-link :to="item.link" v-for="item in navItems" :key="item.id" class="mx-8 cursor-pointer hover:text-pink-300 nav-item relative no-underline" :class="{'active': activeNavItem === item}" @click="activeNavItem = item">{{ item.name }}</nuxt-link>
@@ -21,22 +20,14 @@ export default {
       navItems: [
         {
           id: '1',
-          name: 'Courses',
-          subNavItems: ['Affine cipher', 'Shift Cipher', 'Substitution cipher','Vigenere cipher'],
-          link: '/courses'
+          name: 'Sign In',
+          link: '/sign-in'
         },
         {
           id: '2',
-          name: 'Practices',
-          subNavItems: ['Affine Cipher Practice', 'Shift Cipher Practice', 'Substitution Cipher Practice', 'Vigenere Cipher Practice'],
-          link: '/practices'
+          name: 'Sign up',
+          link: '/sign-up'
         },
-        {
-          id: '3',
-          name: 'Resources',
-          subNavItems: ['Affine Cipher Courses', 'Shift Cipher Courses', 'Subsitution Cipher Courses', 'Vigenere Cipher Courses'],
-          link: '/resources'
-        }
       ],
       activeNavItem: null
     }

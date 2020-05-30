@@ -1,63 +1,68 @@
 <template>
   <div>
-    <ValidationObserver  v-slot="{ invalid }">
-      <form class="flex flex-col w-full">
-        <validation-provider rules="required" v-slot="{ errors }">
-          <div class="flex flex-col relative mt-8">
-            <div class="flex items-center">
-              <label class="mr-4 flex-basis-25">First Name:</label>
-              <input class="flex-basis-75" v-model="firstName" type="text" name="firstName" placeholder="First Name" />
+    <div v-if="error" class="flex items-center error-box">
+      <div class="text-center text-red-400">There was an error creating the user with username {{username}}, please contact system adminstrator for assistance</div>
+    </div>
+    <div v-else>
+      <ValidationObserver  v-slot="{ invalid }">
+        <form class="flex flex-col w-full">
+          <validation-provider rules="required" v-slot="{ errors }">
+            <div class="flex flex-col relative mt-8">
+              <div class="flex items-center">
+                <label class="mr-4 flex-basis-25">First Name:</label>
+                <input class="flex-basis-75" v-model="firstName" type="text" name="firstName" placeholder="First Name" />
+              </div>
+              <span class="absolute text-red-700 text-xs pin-b mt-2 error-text">{{ errors[0] }}</span>
             </div>
-            <span class="absolute text-red-700 text-xs pin-b mt-2 error-text">{{ errors[0] }}</span>
-          </div>
-        </validation-provider>
-        <validation-provider rules="required" v-slot="{ errors }" class="mt-8">
-          <div class="flex flex-col relative">
-            <div class="flex items-center">
-              <label class="mr-4 flex-basis-25">Last Name:</label>
-              <input class="flex-basis-75" v-model="lastName" name="lastName" placeholder="Last Name" />
+          </validation-provider>
+          <validation-provider rules="required" v-slot="{ errors }" class="mt-8">
+            <div class="flex flex-col relative">
+              <div class="flex items-center">
+                <label class="mr-4 flex-basis-25">Last Name:</label>
+                <input class="flex-basis-75" v-model="lastName" name="lastName" placeholder="Last Name" />
+              </div>
+              <span class="absolute text-red-700 text-xs pin-b mt-2 error-text">{{ errors[0] }}</span>
             </div>
-            <span class="absolute text-red-700 text-xs pin-b mt-2 error-text">{{ errors[0] }}</span>
-          </div>
-        </validation-provider>
-        <validation-provider rules="required" v-slot="{ errors }" class="mt-8">
-          <div class="flex flex-col relative">
-            <div class="flex items-center">
-              <label class="mr-4 flex-basis-25">Email:</label>
-              <input class="flex-basis-75" v-model="email" name="email" placeholder="Email" />
+          </validation-provider>
+          <validation-provider rules="required" v-slot="{ errors }" class="mt-8">
+            <div class="flex flex-col relative">
+              <div class="flex items-center">
+                <label class="mr-4 flex-basis-25">Email:</label>
+                <input class="flex-basis-75" v-model="email" name="email" placeholder="Email" />
+              </div>
+              <span class="absolute text-red-700 text-xs pin-b mt-2 error-text">{{ errors[0] }}</span>
             </div>
-            <span class="absolute text-red-700 text-xs pin-b mt-2 error-text">{{ errors[0] }}</span>
-          </div>
-        </validation-provider>
-        <validation-provider rules="required" v-slot="{ errors }" class="mt-8">
-          <div class="flex flex-col relative">
-            <div class="flex items-center">
-              <label class="mr-4 flex-basis-25">User Name:</label>
-              <input class="flex-basis-75" v-model="username" name="username" placeholder="User Name" />
+          </validation-provider>
+          <validation-provider rules="required" v-slot="{ errors }" class="mt-8">
+            <div class="flex flex-col relative">
+              <div class="flex items-center">
+                <label class="mr-4 flex-basis-25">User Name:</label>
+                <input class="flex-basis-75" v-model="username" name="username" placeholder="User Name" />
+              </div>
+              <span class="absolute text-red-700 text-xs pin-b mt-2 error-text">{{ errors[0] }}</span>
             </div>
-            <span class="absolute text-red-700 text-xs pin-b mt-2 error-text">{{ errors[0] }}</span>
-          </div>
-        </validation-provider>
-        <validation-provider rules="required" v-slot="{ errors }" class="mt-8">
-          <div class="flex flex-col relative">
-            <div class="flex items-center">
-              <label class="mr-4 flex-basis-25">Password:</label>
-              <input class="flex-basis-75" v-model="password" name="password" placeholder="Password" />
+          </validation-provider>
+          <validation-provider rules="required" v-slot="{ errors }" class="mt-8">
+            <div class="flex flex-col relative">
+              <div class="flex items-center">
+                <label class="mr-4 flex-basis-25">Password:</label>
+                <input class="flex-basis-75" v-model="password" name="password" placeholder="Password" />
+              </div>
+              <span class="absolute text-red-700 text-xs pin-b mt-2 error-text">{{ errors[0] }}</span>
             </div>
-            <span class="absolute text-red-700 text-xs pin-b mt-2 error-text">{{ errors[0] }}</span>
-          </div>
-        </validation-provider>
-      </form>
-      <div class="flex justify-center mt-16">
-        <button class="text-center" @click="onSubmit" type="submit" :disabled="invalid || isLockedOut">Create Account</button>
-      </div>
-      <span v-if="isLockedOut" class="block text-red-700 pt-2 text-center">Your login attempts exceeded with wrong username/password</span>
-    </ValidationObserver>
+          </validation-provider>
+        </form>
+        <div class="flex justify-center mt-16">
+          <button class="text-center" @click="onSubmit" type="submit" :disabled="invalid || isLockedOut">Create Account</button>
+        </div>
+        <span v-if="isLockedOut" class="block text-red-700 pt-2 text-center">Your login attempts exceeded with wrong username/password</span>
+      </ValidationObserver>
+    </div>
   </div>
 </template>
 
 <script>
-import { ValidationObserver, ValidationProvider } from "vee-validate";
+import { ValidationObserver, ValidationProvider } from "vee-validate"
 export default {
   components: {
     ValidationObserver: ValidationObserver,
@@ -71,11 +76,23 @@ export default {
       username: '',
       password: '',
       counter: 0,
-      isLockedOut: false
+      isLockedOut: false,
+      error: ''
     }
   },
   methods: {
-    onSubmit() {
+    async onSubmit() {
+      let response = await this.$axios.$post('/api/users', {
+        'username': this.username, 
+        'password': this.password
+      })
+
+      if(response.statusCode === 200) {
+        this.$router.push(`/home?username=${this.username}`)
+      } else if (response.statusCode === 500) {
+        this.error = 'There was an error in creating user'
+      }
+
       this.counter++
 
       if(this.counter >= 5) {
@@ -135,5 +152,9 @@ button {
 
 .flex-basis-75 {
   flex-basis: 75%;
+}
+
+.error-box {
+  height: 425px;
 }
 </style>

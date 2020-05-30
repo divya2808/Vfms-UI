@@ -1,4 +1,3 @@
-
 module.exports = {
   mode: 'universal',
   /*
@@ -41,6 +40,7 @@ module.exports = {
   ** Nuxt.js modules
   */
   modules: [
+    '@nuxtjs/axios',
     // ['nuxt-fontawesome', {
     //   component: 'fa', 
     // }]
@@ -81,5 +81,8 @@ module.exports = {
       })
     },
     transpile: ["vee-validate/dist/rules"]
-  }
+  },
+  serverMiddleware: [
+    '~/api/index.js'
+  ]
 }

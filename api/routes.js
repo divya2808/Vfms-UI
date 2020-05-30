@@ -3,6 +3,7 @@ const proxy = require('./createProxyMiddleware')
 
 const router = Router()
 
-router.post(['/users'], proxy)
+router.post(['/users', '/users/authenticate'], proxy)
+
 
 module.exports = router

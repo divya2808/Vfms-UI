@@ -6,7 +6,7 @@
     <div v-else>
       <ValidationObserver  v-slot="{ invalid }">
         <form class="flex flex-col w-full">
-          <validation-provider rules="required" v-slot="{ errors }">
+          <validation-provider rules="required|alpha|min:3" v-slot="{ errors }">
             <div class="flex flex-col relative mt-8">
               <div class="flex items-center">
                 <label class="mr-4 flex-basis-25">First Name:</label>
@@ -46,7 +46,7 @@
             <div class="flex flex-col relative">
               <div class="flex items-center">
                 <label class="mr-4 flex-basis-25">Password:</label>
-                <input class="flex-basis-75" v-model="password" name="password" placeholder="Password" />
+                <input class="flex-basis-75" type="password" v-model="password" name="password" placeholder="Password" />
               </div>
               <span class="absolute text-red-700 text-xs pin-b mt-2 error-text">{{ errors[0] }}</span>
             </div>
@@ -63,6 +63,7 @@
 
 <script>
 import { ValidationObserver, ValidationProvider } from "vee-validate"
+import { mapActions } from 'vuex'
 export default {
   components: {
     ValidationObserver: ValidationObserver,
@@ -81,18 +82,19 @@ export default {
     }
   },
   methods: {
+    ...mapActions('user', ['setUserDetails']),
     async onSubmit() {
       let response = await this.$axios.$post('/api/users', {
         'username': this.username, 
         'password': this.password
       })
-
       if(response.statusCode === 200) {
         this.$router.push(`/home?username=${this.username}`)
       } else if (response.statusCode === 500) {
         this.error = 'There was an error in creating user'
       }
-
+      let userInfo = {username: this.username, password: this.password}
+      this.setUserDetails(userInfo)
       this.counter++
 
       if(this.counter >= 5) {

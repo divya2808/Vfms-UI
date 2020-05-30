@@ -6,7 +6,7 @@
           <div class="flex flex-col relative mt-8">
             <div class="flex items-center">
               <label class="mr-4 flex-basis-25">User Name:</label>
-              <input class="flex-basis-75" v-model="userName" type="text" name="userName" placeholder="UserName" />
+              <input class="flex-basis-75" v-model="username" type="text" name="username" placeholder="User Name" @change="hideMessage" />
             </div>
             <span class="absolute text-red-700 text-xs pin-b mt-2 error-text">{{ errors[0] }}</span>
           </div>
@@ -15,22 +15,23 @@
           <div class="flex flex-col relative">
             <div class="flex items-center">
               <label class="mr-4 flex-basis-25">Password:</label>
-              <input class="flex-basis-75" v-model="password" name="password" placeholder="Password" />
+              <input class="flex-basis-75" v-model="password" type="password" name="password" placeholder="Password" @change="hideMessage" />
             </div>
             <span class="absolute text-red-700 text-xs pin-b mt-2 error-text">{{ errors[0] }}</span>
           </div>
         </validation-provider>
       </form>
       <div class="flex justify-center mt-16">
-        <button class="text-center" @click="onSubmit" type="submit" :disabled="invalid || isLockedOut">Create Account</button>
+        <button class="text-center" @click="onSubmit" type="submit" :disabled="invalid || isLockedOut">Log in</button>
       </div>
-      <span v-if="isLockedOut" class="block text-red-700 pt-2 text-center">Your login attempts exceeded with wrong username/password</span>
+      <span v-if="showMessage" class="block text-red-700 pt-2 text-center mt-4">{{ message }}</span>
     </ValidationObserver>
   </div>
 </template>
 
 <script>
 import { ValidationObserver, ValidationProvider } from "vee-validate";
+import { mapActions, mapState } from 'vuex'
 export default {
   components: {
     ValidationObserver: ValidationObserver,
@@ -38,23 +39,37 @@ export default {
   },
   data() {
     return {
-      firstName: '',
-      lastName: '',
-      email: '',
       username: '',
       password: '',
-      counter: 0,
-      isLockedOut: false
+      isLockedOut: false,
+      localCounter: 0,
+      message: '',
+      showMessage: false
     }
   },
+  computed: {
+    ...mapState('user', ['counter'])
+  },
   methods: {
-    onSubmit() {
-      this.counter++
-
-      if(this.counter >= 5) {
-        this.isLockedOut = true
+    ...mapActions('user', ['setCounter']),
+    async onSubmit() {
+      let response = await this.$axios.$post('/api/users/authenticate', {
+        username: this.username,
+        password: this.password
+      })
+      if(response !== 200) {
+        this.showMessage = true
+        this.message = 'Authentication Failed'
+        this.localCounter++
+        this.setCounter(this.localCounter)
+        if(this.counter == 5) {
+          this.isLockedOut = true
+          this.message = 'You have exceeded maximum number of invalid login attempts'
+        }
       }
-
+    },
+    hideMessage() {
+      this.showMessage = false
     }
   }  
 }

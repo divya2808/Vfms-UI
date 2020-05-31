@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ValidationObserver  v-slot="{ invalid }">
+    <ValidationObserver v-slot="{ invalid }">
       <form class="flex flex-col w-full">
         <validation-provider rules="required" v-slot="{ errors }">
           <div class="flex flex-col relative mt-8">
@@ -44,7 +44,7 @@ export default {
       isLockedOut: false,
       localCounter: 0,
       message: '',
-      showMessage: false
+      showMessage: false,
     }
   },
   computed: {
@@ -57,7 +57,7 @@ export default {
         username: this.username,
         password: this.password
       })
-      if(response !== 200) {
+      if(response.statusCode !== 200) {
         this.showMessage = true
         this.message = 'Authentication Failed'
         this.localCounter++
@@ -66,6 +66,8 @@ export default {
           this.isLockedOut = true
           this.message = 'You have exceeded maximum number of invalid login attempts'
         }
+      } else if (response.statusCode === 200) {
+        this.$emit('signed-in', {username: this.username, password: this.password})
       }
     },
     hideMessage() {
@@ -75,7 +77,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .modal-container {
   width: 600px;
   box-shadow: 0 4px 8px 0 rgba(27,43,52,.12), 0 2px 4px 0 rgba(27,43,52,.08);

@@ -1,12 +1,32 @@
 <template>
-  <div class="mt-16 modal-container p-16">
+  <div v-if="!isSignedIn" class="mt-16 modal-container p-16">
     <div class="flex justify-center">
       <span class="text-2xl font-normal mr-2 cursor-pointer" @click="currentTab = 'SignUp'" :class="{'tab-active': currentTab === 'SignUp'}">Sign Up</span>
       <span class="text-2xl font-normal">/</span>
       <span class="text-2xl font-normal ml-2 cursor-pointer" @click="currentTab = 'SignIn'" :class="{'tab-active': currentTab === 'SignIn'}">Sign In</span>
     </div>
     <sign-up v-if="currentTab === 'SignUp'" />
-    <sign-in v-if="currentTab === 'SignIn'" />
+    <sign-in @signed-in="toggleSignIn" v-if="currentTab === 'SignIn'" />
+  </div>
+  <div v-else class="max-w-1200">
+    <div class="text-center">{{ `You are currently in: /home/${username}` }}</div>
+    <div class="text-center">List of files under your home:</div>
+    <div class="text-center">{{ files }}</div>
+    <div class="text-center font-bold text-2xl mt-8">Manage User permissions</div>
+    <div class="flex mt-12 justify-around">
+      <input class="input" type="text" name="directoryName" v-model="directoryName" placeholder="Path to Directory" />
+      <input class="input" type="text" name="accessUser" v-model="accessUser" placeholder="User name" />
+      <button class="manage-access mx-4" @click="userPermissions('user-d-r')">Read Access</button>
+      <button class="manage-access mx-4" @click="userPermissions('user-d-r-w')">Read/Write Access</button>
+      <button class="manage-access mx-4" @click="userPermissions('user-d-r-w-x')">Read/Write/execute</button>
+    </div>
+    <div class="flex mt-12 justify-around">
+      <input class="input" type="text" name="fileName" v-model="fileName" placeholder="Path to File" />
+      <input class="input" type="text" name="accessUser" v-model="accessUser" placeholder="User name" />
+      <button class="manage-access mx-4" @click="userPermissions('user-f-r')">Read Access</button>
+      <button class="manage-access mx-4" @click="userPermissions('user-f-r-w')">Read/Write Access</button>
+      <button class="manage-access mx-4" @click="userPermissions('user-f-r-w-x')">Read/Write/execute</button>
+    </div>
   </div>
 </template>
 
@@ -25,7 +45,13 @@ export default {
       password: '',
       counter: 0,
       isLockedOut: false,
-      currentTab: 'SignUp'
+      currentTab: 'SignUp',
+      isSignedIn: false,
+      files: null,
+      directoryName: '',
+      accessUser: '',
+      permission: '',
+      fileName: '',
     }
   },
   methods: {
@@ -36,12 +62,84 @@ export default {
         this.isLockedOut = true
       }
 
+    },
+    toggleSignIn(event) {
+      this.isSignedIn = true
+      this.username = event.username
+      this.password = event.password
+      this.loadFiles()
+    },
+    async loadFiles() {
+      let response = await this.$axios.$get('/api/users/files', {
+        headers: {
+          username: this.username,
+          password: this.password
+        }
+      })
+      if(response.statusCode === 200) {
+        this.files = response.response
+      }
+    },
+    async createFolder() {
+      if(!this.folderName) return
+      let response = await this.$axios.$post('/api/users/create-directory', {
+        username: this.username,
+        password: this.password,
+        folderName: this.folderName
+      })
+    }, 
+    async userPermissions(userPermission) {
+      let accessTo, permission
+      switch(userPermission) {
+        case 'user-f-r': {
+          accessTo = 'file'
+          permission = 'r'
+        }
+        case 'user-f-r-w': {
+          accessTo = 'file'
+          permission = 'rw'
+        }
+        case 'user-f-r-w-x': {
+          accessTo = 'file'
+          permission = 'rwx'
+        }
+        case 'user-d-r': {
+          accessTo = 'directory'
+          permission = 'r'
+        }
+        case 'user-d-r-w': {
+          accessTo = 'directory'
+          permission = 'rw'
+        }
+        case 'user-d-r-w-x': {
+          accessTo = 'directory'
+          permission = 'rwx'
+        }
+      }
+
+      if(accessTo === 'directory') {
+        await this.$axios.$post('/api/users/change-permissions', {
+          username: this.username,
+          password: this.password,
+          directoryName: this.directoryName,
+          accessUser: this.accessUser,
+          permission: permission
+        })
+      } else if (accessTo === 'file') {
+        await this.$axios.$post('/api/users/change-permissions', {
+          username: this.username,
+          password: this.password,
+          fileName: this.fileName,
+          accessUser: this.accessUser,
+          permission: permission
+        })
+      }
     }
   }  
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 body {
   @apply font-mono;
 }
@@ -64,7 +162,7 @@ input {
   }
 }
 
-button {
+.log-in, .sign-up {
   background-color: #0081da;
   padding: 8px 54px;
   border-radius: 20px;
@@ -89,5 +187,33 @@ button {
 .tab-active {
   color: #0081da;
   border-bottom: 1px solid #0081da;
+}
+
+.max-w-1200 {
+  max-width: 1200px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 24px;
+  font-size: 24px;
+}
+
+.input {
+  border: 1px solid #0081da;
+  padding: 8px;
+  font-size: 16px;
+  margin-right: 16px;
+}
+
+.manage-access {
+  font-size: 16px;
+  padding: 8px 24px;
+  align-self: center;
+  background-color: #0081da;
+  border-radius: 40px;
+  color: white;
+
+  &:hover {
+    background-color: #002D5C;
+  }
 }
 </style>

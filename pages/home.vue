@@ -15,9 +15,6 @@ import { mapState } from 'vuex'
     },
     computed: {
       ...mapState('user', ['username', 'password'])
-    },
-    created() {
-      console.log(this.username, this.password)
     }
   }
 </script>

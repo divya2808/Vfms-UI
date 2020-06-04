@@ -54,12 +54,12 @@ export default {
       permissions: [
         {
           givenPermission: 'user-f-r',
-          setPermission: 'r',
+          setPermission: 'r--',
           accessTo: 'file'
         },
         {
           givenPermission: 'user-f-r-w',
-          setPermission: 'rw',
+          setPermission: 'rw-',
           accessTo: 'file'
         },
         {
@@ -69,12 +69,12 @@ export default {
         },
         {
           givenPermission: 'user-d-r',
-          setPermission: 'r',
+          setPermission: 'r--',
           accessTo: 'directory'
         },
         {
           givenPermission: 'user-d-r-w',
-          setPermission: 'rw',
+          setPermission: 'rw-',
           accessTo: 'directory'
         },
         {

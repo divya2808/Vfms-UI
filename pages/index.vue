@@ -50,8 +50,39 @@ export default {
       files: null,
       directoryName: '',
       accessUser: '',
-      permission: '',
       fileName: '',
+      permissions: [
+        {
+          givenPermission: 'user-f-r',
+          setPermission: 'r',
+          accessTo: 'file'
+        },
+        {
+          givenPermission: 'user-f-r-w',
+          setPermission: 'rw',
+          accessTo: 'file'
+        },
+        {
+          givenPermission: 'user-f-r-w-x',
+          setPermission: 'rwx',
+          accessTo: 'file'
+        },
+        {
+          givenPermission: 'user-d-r',
+          setPermission: 'r',
+          accessTo: 'directory'
+        },
+        {
+          givenPermission: 'user-d-r-w',
+          setPermission: 'rw',
+          accessTo: 'directory'
+        },
+        {
+          givenPermission: 'user-f-r-w-x',
+          setPermission: 'rwx',
+          accessTo: 'directory'
+        },
+      ]
     }
   },
   methods: {
@@ -89,33 +120,9 @@ export default {
       })
     }, 
     async userPermissions(userPermission) {
-      let accessTo, permission
-      switch(userPermission) {
-        case 'user-f-r': {
-          accessTo = 'file'
-          permission = 'r'
-        }
-        case 'user-f-r-w': {
-          accessTo = 'file'
-          permission = 'rw'
-        }
-        case 'user-f-r-w-x': {
-          accessTo = 'file'
-          permission = 'rwx'
-        }
-        case 'user-d-r': {
-          accessTo = 'directory'
-          permission = 'r'
-        }
-        case 'user-d-r-w': {
-          accessTo = 'directory'
-          permission = 'rw'
-        }
-        case 'user-d-r-w-x': {
-          accessTo = 'directory'
-          permission = 'rwx'
-        }
-      }
+      let permissionObj = this.permissions.find(permission => permission.givenPermission === userPermission)
+      let accessTo = permissionObj.accessTo
+      let permission = permissionObj.setPermission
 
       if(accessTo === 'directory') {
         await this.$axios.$post('/api/users/change-permissions', {

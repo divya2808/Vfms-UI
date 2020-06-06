@@ -78,7 +78,7 @@ export default {
           accessTo: 'directory'
         },
         {
-          givenPermission: 'user-f-r-w-x',
+          givenPermission: 'user-d-r-w-x',
           setPermission: 'rwx',
           accessTo: 'directory'
         },

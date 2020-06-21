@@ -32,6 +32,7 @@
 <script>
 import { ValidationObserver, ValidationProvider } from "vee-validate";
 import { mapActions, mapState } from 'vuex'
+import secrets from '~/assets/data/secrets.js'
 export default {
   components: {
     ValidationObserver: ValidationObserver,
@@ -57,6 +58,13 @@ export default {
         username: this.username,
         password: this.password
       })
+      let creds = {
+        username: this.username,
+        password: this.password
+      }
+
+      secrets.set(creds)
+      console.log(secrets.get())
       if(response.statusCode !== 200) {
         this.showMessage = true
         this.message = 'Authentication Failed'

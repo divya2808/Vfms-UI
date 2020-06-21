@@ -1,12 +1,12 @@
 <template>
   <div v-if="!isSignedIn" class="mt-16 modal-container p-16">
     <div class="flex justify-center">
-      <span class="text-2xl font-normal mr-2 cursor-pointer" @click="currentTab = 'SignUp'" :class="{'tab-active': currentTab === 'SignUp'}">Sign Up</span>
+      <span class="text-2xl font-normal mr-2 cursor-pointer" @click="currentSubTab = 'SignUp'" :class="{'tab-active': currentSubTab === 'SignUp'}">Sign Up</span>
       <span class="text-2xl font-normal">/</span>
-      <span class="text-2xl font-normal ml-2 cursor-pointer" @click="currentTab = 'SignIn'" :class="{'tab-active': currentTab === 'SignIn'}">Sign In</span>
+      <span class="text-2xl font-normal ml-2 cursor-pointer" @click="currentSubTab = 'SignIn'" :class="{'tab-active': currentSubTab === 'SignIn'}">Sign In</span>
     </div>
-    <sign-up v-if="currentTab === 'SignUp'" />
-    <sign-in @signed-in="toggleSignIn" v-if="currentTab === 'SignIn'" />
+    <sign-up v-if="currentSubTab === 'SignUp'" />
+    <sign-in @signed-in="toggleSignIn" v-if="currentSubTab === 'SignIn'" />
   </div>
   <div v-else class="max-w-1200">
     <div class="text-center">{{ `You are currently in: /home/${username}` }}</div>
@@ -45,7 +45,7 @@ export default {
       password: '',
       counter: 0,
       isLockedOut: false,
-      currentTab: 'SignUp',
+      currentSubTab: 'SignUp',
       isSignedIn: false,
       files: null,
       directoryName: '',

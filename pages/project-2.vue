@@ -19,6 +19,7 @@ import CatFiles from '~/components/CatFiles'
 import DeleteFiles from '~/components/DeleteFiles'
 import ReplaceFiles from '~/components/ReplaceFiles'
 import UploadFiles from '~/components/UploadFiles'
+import CreateFile from '~/components/CreateFile'
 export default {
   data() {
     return {
@@ -50,6 +51,11 @@ export default {
           id: 5,
           name: 'UploadFiles',
           title: 'Upload Files'
+        },
+        {
+          id: 6,
+          name: 'CreateFile',
+          title: 'Create Empty File'
         }
       ],
       currentNav: 1,
@@ -61,7 +67,8 @@ export default {
     CatFiles,
     DeleteFiles,
     ReplaceFiles,
-    UploadFiles
+    UploadFiles,
+    CreateFile
   },
   created() {
     let creds = secrets.get()

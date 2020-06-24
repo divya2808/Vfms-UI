@@ -1,10 +1,10 @@
 <template>
   <div class="mt-8 max-w-1200 mx-auto">
     <div v-if="files && !loadedMessage">
-      <h1 class="text-xl text-blue-500">Files under the current folder:</h1>
+      <h1 class="text-xl font-bold">Files under the current folder:</h1>
       <span v-for="file in files" :key="file" class="block text-xl mt-4">{{ file }}</span>
     </div>
-    <div v-else class="text-xl mt-4">{{ loadedMessage }}</div>
+    <div v-else class="text-xl mt-8 text-center">{{ loadedMessage }}</div>
   </div>
 </template>
 

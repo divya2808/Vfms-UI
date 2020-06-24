@@ -1,23 +1,13 @@
 <template>
-  <div class="max-w-925 mx-auto mt-16">
+  <div class="max-w-925 mx-auto mt-8">
     <div v-if="credsMessage" class="text-xl text-center">
       {{ credsMessage }}
     </div>
     <div v-else>
-      <div>
-        <div class="text-xl text-center">
-          <div class="flex items-center mt-8">
-            <h1 class="text-xl">Provide path for the file to upload to the folder</h1>
-            <input placeholder="provide path for file to upload to with SFTP" v-model="uploadFilePath" />
-            <button class="ml-8" :disabled="uploadFilePath === ''" @click="uploadFile">Upload</button>
-          </div>
-        </div>
-        <div v-if="uploadMessage" :style="{'color': color}" class="text-xl mt-6 text-center">{{ `Status: ${uploadMessage}` }}</div>
-      </div>
-      <ul class="max-w-1200 mx-auto flex items-center justify-between mt-16">
-        <li v-for="item in subNav" :key="item.id" @click="currentNav === item.id" class="cursor-pointer text-xl" :class="{'active': currentNav === item.id}">{{ item.title }}</li>
+      <ul class="max-w-1200 mx-auto flex items-center justify-between mt-8">
+        <li v-for="item in subNav" :key="item.id" @click="getComponent(item.id)" class="cursor-pointer text-xl" :class="{'active': currentNav === item.id}">{{ item.title }}</li>
       </ul>
-      <component :is="getComponent()" :username="username" :password="password" />
+      <component :is="currentComponent" :key="currentComponent" :username="username" :password="password" />
     </div>
   </div>
 </template>
@@ -25,28 +15,53 @@
 <script>
 import secrets from '~/assets/data/secrets.js'
 import ListFiles from '~/components/ListFiles'
+import CatFiles from '~/components/CatFiles'
+import DeleteFiles from '~/components/DeleteFiles'
+import ReplaceFiles from '~/components/ReplaceFiles'
+import UploadFiles from '~/components/UploadFiles'
 export default {
   data() {
     return {
       username: '',
       password: '',
-      pathMessage: '',
       credsMessage: '',
-      uploadFilePath: '',
-      uploadMessage: '',
-      color: '',
       subNav: [
         {
           id: 1,
           name: 'ListFiles',
           title: 'List Files'
+        },
+        {
+          id: 2,
+          name: 'CatFiles',
+          title: 'Cat File'
+        },
+        {
+          id: 3,
+          name: 'DeleteFiles',
+          title: 'Delete Files'
+        },
+        {
+          id: 4,
+          name: 'ReplaceFiles',
+          title: 'Replace Files'
+        },
+        {
+          id: 5,
+          name: 'UploadFiles',
+          title: 'Upload Files'
         }
       ],
-      currentNav: 1
+      currentNav: 1,
+      currentComponent: 'ListFiles'
     }
   },
   components: {
-    ListFiles
+    ListFiles,
+    CatFiles,
+    DeleteFiles,
+    ReplaceFiles,
+    UploadFiles
   },
   created() {
     let creds = secrets.get()
@@ -58,23 +73,10 @@ export default {
     }
   },
   methods: {
-    async uploadFile() {
-      let response = await this.$axios.$post('/api/users/upload-file', {
-        uploadFilePath: this.uploadFilePath,
-        username: this.username,
-        password: this.password
-      })
-      if(response.statusCode === 200) {
-        this.uploadMessage = response.message
-        this.color = '#0081da'
-      } else {
-        this.uploadMessage = response.message
-        this.color = '#FF0000'
-      }
-    },
-    getComponent() {
+    getComponent(id) {
+      this.currentNav = id
       let activeItem = this.subNav.find(it => it.id === this.currentNav)
-      return activeItem.name
+      this.currentComponent = activeItem.name
     }
   }
 }
@@ -115,5 +117,7 @@ button {
 
 .active {
   border-bottom: 2px solid #0081da;
+  color: #0081da;
+  font-weight: 600;
 }
 </style>

@@ -4,15 +4,9 @@
       {{ credsMessage }}
     </div>
     <div v-else>
-      <div v-if="pathMessage === ''" class="flex items-center">
-        <h1 class="text-xl">Provide the path for the testing folder</h1>
-        <input placeholder="Path to testing folder" class="ml-8" v-model="path" />
-        <button class="ml-8" :disabled="path === ''" @click="setPath">Enter</button>
-      </div>
-      <div v-else class="text-xl text-center">
-        <span class="block text-center">{{ `${pathMessage} to ${path}` }}</span>
+      <div class="text-xl text-center">
         <div class="flex items-center mt-8">
-          <h1 class="text-xl">Provide path for the file to {{ path }} upload with SFTP</h1>
+          <h1 class="text-xl">Provide path for the file to upload to the folder</h1>
           <input placeholder="provide path for file to upload to with SFTP" v-model="uploadFilePath" />
           <button class="ml-8" :disabled="uploadFilePath === ''" @click="uploadFile">Upload</button>
         </div>
@@ -27,7 +21,6 @@ import secrets from '~/assets/data/secrets.js'
 export default {
   data() {
     return {
-      path: '',
       username: '',
       password: '',
       pathMessage: '',
@@ -47,12 +40,8 @@ export default {
     }
   },
   methods: {
-    setPath() {
-      this.pathMessage = 'Testing folder path has been set'
-    },
     async uploadFile() {
       let response = await this.$axios.$post('/api/users/upload-file', {
-        path: this.path,
         uploadFilePath: this.uploadFilePath,
         username: this.username,
         password: this.password

@@ -99,6 +99,7 @@ export default {
       this.username = event.username
       this.password = event.password
       this.loadFiles()
+      this.$nuxt.$emit('signed-in-index', {username: event.username, password: event.password})
     },
     async loadFiles() {
       let response = await this.$axios.$get('/api/users/files', {

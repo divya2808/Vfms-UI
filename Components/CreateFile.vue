@@ -51,8 +51,8 @@ import _includes from 'lodash/includes'
         if(!files) {
           this.loadedMessage = 'Currently there are no files under this folder'
         }
-        let parsedFiles = files.split(/\r?\n/)
-        this.files = parsedFiles
+        let parsedFiles = files ? files.split(/\r?\n/) : []
+        this.files = parsedFiles && parsedFiles.length > 0 ? parsedFiles : []
       } else {
         this.loadedMessage = 'Failed to load files'
       }

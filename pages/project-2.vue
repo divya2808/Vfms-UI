@@ -35,7 +35,7 @@ export default {
         {
           id: 2,
           name: 'CatFiles',
-          title: 'Cat File'
+          title: 'Read Files'
         },
         {
           id: 3,

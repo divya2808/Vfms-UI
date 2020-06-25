@@ -3,7 +3,7 @@
     <div class="text-xl text-center">
       <div class="mt-16">
         <div class="flex items-center">
-          <h1 class="text-xl inline-block text-left mr-8">Provide localhost path for the file to upload to the folder in ubuntu server</h1>
+          <h1 class="text-xl inline-block text-left mr-8">Provide name of the file that you would like replace in the folder</h1>
           <input placeholder="filename with extension on ubuntu" v-model="fileName" />
         </div>
         <div class="flex items-center mt-8">

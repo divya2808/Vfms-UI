@@ -39,8 +39,7 @@ export default {
       })
 
       if(response.statusCode === 200) {
-        this.quitMessage = response.message + ' Please reload and sign in to create a new session. The /temp file on the ubuntu server is deleted, please create it again and change permissions for all users to read/write/execute'
-      } else {
+        this.quitMessage = response.message + ' Please reload and sign in to create a new session.'
         this.quitMessage = response.message
       }
     },

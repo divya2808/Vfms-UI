@@ -64,7 +64,6 @@ export default {
       }
 
       secrets.set(creds)
-      console.log(secrets.get())
       if(response.statusCode !== 200) {
         this.showMessage = true
         this.message = 'Authentication Failed'
@@ -76,6 +75,7 @@ export default {
         }
       } else if (response.statusCode === 200) {
         this.$emit('signed-in', {username: this.username, password: this.password})
+        //this.$emit('signed-in', {username: this.username, password: this.password})
       }
     },
     hideMessage() {

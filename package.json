@@ -19,7 +19,7 @@
     "font-awesome": "^4.7.0",
     "http-proxy-middleware": "^1.0.4",
     "js-cipher": "^1.0.5",
-    "node-sass": "^4.14.0",
+    "node-sass": "^7.0.0",
     "nuxt": "^2.0.0",
     "nuxt-fontawesome": "^0.4.0",
     "sass-loader": "^8.0.2",
